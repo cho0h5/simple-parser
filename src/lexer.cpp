@@ -43,8 +43,10 @@ void Lexer::lexical() {
 		return;
 	}
 	if (next_char == ':') {
+		token_string.push_back(next_char);
 		file.get(next_char);
 		if (next_char == '=') {
+			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = ASSIGNMENT_OP;
 			return;
@@ -52,26 +54,31 @@ void Lexer::lexical() {
 		// 예외처리 필요
 	}
 	if (next_char == ';') {
+			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = SEMI_COLON;
 			return;
 	}
 	if (next_char == '+' || next_char == '-') {
+			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = ADD_OP;
 			return;
 	}
 	if (next_char == '*' || next_char == '/') {
+			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = MULT_OP;
 			return;
 	}
 	if (next_char == '(') {
+			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = LEFT_PAREN;
 			return;
 	}
 	if (next_char == ')') {
+			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = RIGHT_PAREN;
 			return;
