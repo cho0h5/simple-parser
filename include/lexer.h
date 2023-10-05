@@ -25,7 +25,7 @@ enum Terminal {
 	MULT_OP,		// * | /
 	LEFT_PAREN,		// (
 	RIGHT_PAREN,	// )
-	END_OF_FILE,	// 필요한가?
+	END_OF_FILE,	// EOF
 };
 
 class Lexer {
