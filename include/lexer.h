@@ -17,14 +17,14 @@ enum Terminal {
 };
 
 enum Nonterminal {
-	CONST,
-	IDENT,
-	ASSIGNMENT_OP,
-	SEMI_COLON,
-	ADD_OP,
-	MULT_OP,
-	LEFT_PAREN,
-	RIGHT_PAREN,
+	CONST,			// any decimal numbers
+	IDENT,			// any names conforming to C identifier rule
+	ASSIGNMENT_OP,	// :=
+	SEMI_COLON,		// ;
+	ADD_OP,			// + | -
+	MULT_OP,		// * | /
+	LEFT_PAREN,		// (
+	RIGHT_PAREN,	// )
 	EOL,	// 필요한가?
 };
 
@@ -41,6 +41,8 @@ class Lexer {
 	~Lexer();
 
 	void lexical();
+	Nonterminal get_next_token();
+	string get_token_string();
 };
 
 #endif
