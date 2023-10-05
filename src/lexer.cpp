@@ -15,11 +15,19 @@ Lexer::~Lexer() {
 
 void Lexer::lexical() {
 	token_string.clear();
+	if (file.eof()) {
+		next_token = END_OF_FILE;
+		return;
+	}
 	while (next_char <= 32) {
 		file.get(next_char);
+		if (file.eof()) {
+			next_token = END_OF_FILE;
+			return;
+		}
 	}
 	if (isdigit(next_char)) {
-		while (isdigit(next_char)) {
+		while (isdigit(next_char) && !file.eof()) {
 			token_string.push_back(next_char);
 			file.get(next_char);
 		}
@@ -27,7 +35,7 @@ void Lexer::lexical() {
 		return;
 	}
 	if (isalpha(next_char)) {
-		while (isalpha(next_char) || isdigit(next_char)) {
+		while ((isalpha(next_char) || isdigit(next_char)) && !file.eof()) {
 			token_string.push_back(next_char);
 			file.get(next_char);
 		}
@@ -68,14 +76,14 @@ void Lexer::lexical() {
 			next_token = RIGHT_PAREN;
 			return;
 	}
-	next_token = EOL;
 	// 예외처리 필요
 }
 
 
-Nonterminal Lexer::get_next_token() {
+Terminal Lexer::get_next_token() {
 	return next_token;
 }
+
 string Lexer::get_token_string() {
 	return token_string;
 }

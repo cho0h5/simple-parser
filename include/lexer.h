@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum Terminal {
+enum Nonterminal {
 	PROGRAM,
 	STATEMENTS,
 	STATEMENT,
@@ -16,7 +16,7 @@ enum Terminal {
 	FACTOR_TAIL,
 };
 
-enum Nonterminal {
+enum Terminal {
 	CONST,			// any decimal numbers
 	IDENT,			// any names conforming to C identifier rule
 	ASSIGNMENT_OP,	// :=
@@ -25,7 +25,7 @@ enum Nonterminal {
 	MULT_OP,		// * | /
 	LEFT_PAREN,		// (
 	RIGHT_PAREN,	// )
-	EOL,	// 필요한가?
+	END_OF_FILE,	// 필요한가?
 };
 
 class Lexer {
@@ -33,7 +33,7 @@ class Lexer {
 
 	char next_char;
 
-	Nonterminal next_token;
+	Terminal next_token;
 	string token_string;
 
 	public:
@@ -41,7 +41,7 @@ class Lexer {
 	~Lexer();
 
 	void lexical();
-	Nonterminal get_next_token();
+	Terminal get_next_token();
 	string get_token_string();
 };
 
