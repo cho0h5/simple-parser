@@ -45,6 +45,14 @@ void Parser::term() {
 	factor_tail();
 }
 
+void Parser::factor_tail() {
+	if (lexer.get_next_token() == MULT_OP) {
+		lexer.lexical();
+		factor();
+		factor_tail();
+	}
+}
+
 void Parser::factor() {
 	if (lexer.get_next_token() == LEFT_PAREN) {
 		lexer.lexical();
@@ -63,7 +71,7 @@ void Parser::factor() {
 	}
 }
 
-Parser::Parser(Lexer lexer) : lexer(lexer) {
+Parser::Parser(Lexer lexer) : lexer(std::move(lexer)) {
 }
 
 void Parser::parse() {
