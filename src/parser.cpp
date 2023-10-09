@@ -79,7 +79,7 @@ void Parser::factor() {
 		}
 	} else if (lexer.get_next_token() == IDENT) {
 		if (symbol_table->is_exist(lexer.get_token_string()) == false) {
-			cout << "error: undefined ident\n";	// error: undefined ident
+			cout << "error: undefined ident (" << lexer.get_token_string() << ")\n";	// error: undefined ident
 			symbol_table->add_ident(lexer.get_token_string());
 		}
 		lexer.lexical();
