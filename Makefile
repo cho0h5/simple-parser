@@ -5,7 +5,7 @@ SRCS = src/main.cpp src/lexer.cpp src/parser.cpp
 OBJS = $(SRCS:.cpp=.o)
 SRC_DIR = ./src
 INCLUDE = -Iinclude/
-HEADERS = include/lexer.h include/parser.h
+HEADERS = include/lexer.h include/parser.h include/tree.h
 
 all: $(TARGET)
 
