@@ -30,7 +30,6 @@ void Lexer::lexical() {
 			file.get(next_char);
 		}
 		next_token = CONST;
-		cout << "Next string: " << get_token_string() << '\n';	// debug
 		return;
 	}
 	if (isalpha(next_char)) {
@@ -39,7 +38,6 @@ void Lexer::lexical() {
 			file.get(next_char);
 		}
 		next_token = IDENT;
-		cout << "Next string: " << get_token_string() << '\n';	// debug
 		return;
 	}
 	if (next_char == ':') {
@@ -49,7 +47,6 @@ void Lexer::lexical() {
 			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = ASSIGNMENT_OP;
-			cout << "Next string: " << get_token_string() << '\n';	// debug
 			return;
 		}
 		// 예외처리 필요
@@ -58,35 +55,30 @@ void Lexer::lexical() {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = SEMI_COLON;
-		cout << "Next string: " << get_token_string() << '\n';	// debug
 		return;
 	}
 	if (next_char == '+' || next_char == '-') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = ADD_OP;
-		cout << "Next string: " << get_token_string() << '\n';	// debug
 		return;
 	}
 	if (next_char == '*' || next_char == '/') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = MULT_OP;
-		cout << "Next string: " << get_token_string() << '\n';	// debug
 		return;
 	}
 	if (next_char == '(') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = LEFT_PAREN;
-		cout << "Next string: " << get_token_string() << '\n';	// debug
 		return;
 	}
 	if (next_char == ')') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = RIGHT_PAREN;
-		cout << "Next string: " << get_token_string() << '\n';	// debug
 		return;
 	}
 	// 예외처리 필요
