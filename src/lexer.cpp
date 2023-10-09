@@ -2,6 +2,7 @@
 
 // := 식별할 때 예외처리 필요
 // 아무것도 식별 룰에 안 걸릴 때 예외처리 필요
+// 음수 처리?
 
 Lexer::Lexer(const char* filename) {
 	file.open(filename, ios::in | ios::binary);
