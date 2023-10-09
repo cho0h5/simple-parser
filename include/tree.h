@@ -12,6 +12,9 @@ class Tree {
 
 	public:
 	virtual int evaluate();
+	virtual int get_const_count();
+	virtual int get_op_count();
+	virtual void print();
 }
 
 class Program : public Tree {
