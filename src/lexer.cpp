@@ -1,6 +1,5 @@
 #include <lexer.h>
 
-// c identifier 조건 확인 필요
 // := 식별할 때 예외처리 필요
 // 아무것도 식별 룰에 안 걸릴 때 예외처리 필요
 
@@ -9,19 +8,17 @@ Lexer::Lexer(const char* filename) {
 	file.get(next_char);
 }
 
-Lexer::~Lexer() {
-	file.close();
-}
-
 void Lexer::lexical() {
 	token_string.clear();
 	if (file.eof()) {
+		file.close();
 		next_token = END_OF_FILE;
 		return;
 	}
 	while (next_char <= 32) {
 		file.get(next_char);
 		if (file.eof()) {
+			file.close();
 			next_token = END_OF_FILE;
 			return;
 		}
