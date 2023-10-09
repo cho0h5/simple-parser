@@ -1,7 +1,11 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include <iostream>
+
 #include <lexer.h>
+
+using namespace std;
 
 class Parser {
 	Lexer lexer;

@@ -11,4 +11,6 @@ int main(int argc, char **argv) {
 
 	Lexer lexer(argv[1]);
 	Parser parser(std::move(lexer));
+
+	parser.parse();
 }
