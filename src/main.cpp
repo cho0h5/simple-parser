@@ -10,7 +10,8 @@ int main(int argc, char **argv) {
 	}
 
 	Lexer lexer(argv[1]);
-	Parser parser(std::move(lexer));
+	SymbolTable symbol_table;
+	Parser parser(std::move(lexer), &symbol_table);
 
 	parser.parse();
 }

@@ -19,6 +19,7 @@ void Parser::statements() {
 void Parser::statement() {
 	cout << "Enter <statement>\n";	// debug
 	if (lexer.get_next_token() == IDENT) {
+		symbol_table->add_ident(lexer.get_token_string());
 		lexer.lexical();
 	} else {
 		cout << "error\n";	// error
@@ -77,6 +78,10 @@ void Parser::factor() {
 			cout << "error\n";	// error
 		}
 	} else if (lexer.get_next_token() == IDENT) {
+		if (symbol_table->is_exist(lexer.get_token_string()) == false) {
+			cout << "error: undefined ident\n";	// error: undefined ident
+			symbol_table->add_ident(lexer.get_token_string());
+		}
 		lexer.lexical();
 	} else if (lexer.get_next_token() == CONST) {
 		lexer.lexical();
@@ -86,7 +91,7 @@ void Parser::factor() {
 	cout << "Exit <factor>\n";	// debug
 }
 
-Parser::Parser(Lexer lexer) : lexer(std::move(lexer)) {
+Parser::Parser(Lexer lexer, SymbolTable *symbol_table) : lexer(std::move(lexer)), symbol_table(symbol_table) {
 }
 
 void Parser::parse() {

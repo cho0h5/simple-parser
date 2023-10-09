@@ -4,11 +4,13 @@
 #include <iostream>
 
 #include <lexer.h>
+#include <symbol_table.h>
 
 using namespace std;
 
 class Parser {
 	Lexer lexer;
+	SymbolTable *symbol_table;
 
 	void program();
 	void statements();
@@ -20,7 +22,7 @@ class Parser {
 	void factor();
 
 	public:
-	Parser(Lexer lexer);
+	Parser(Lexer lexer, SymbolTable *symbol_table);
 	void parse();
 };
 

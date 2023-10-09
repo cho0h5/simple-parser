@@ -17,5 +17,6 @@ int SymbolTable::get_value(string ident) {
 }
 
 void SymbolTable::set_value(string ident, int value) {
+	table[ident].is_unknown = false;
 	table[ident].value = value;
 }
