@@ -38,7 +38,6 @@ class Lexer {
 
 	public:
 	Lexer(const char* filename);
-	~Lexer();
 
 	void lexical();
 	Terminal get_next_token();

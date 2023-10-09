@@ -1,11 +1,11 @@
 TARGET = parser
 CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++17 -g
-SRCS = src/main.cpp src/lexer.cpp
+SRCS = src/main.cpp src/lexer.cpp src/parser.cpp
 OBJS = $(SRCS:.cpp=.o)
 SRC_DIR = ./src
 INCLUDE = -Iinclude/
-HEADERS = include/lexer.h
+HEADERS = include/lexer.h include/parser.h
 
 all: $(TARGET)
 
