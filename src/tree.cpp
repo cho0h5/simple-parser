@@ -1,5 +1,7 @@
 #include <tree.h>
 
+//////////////// Program ////////////////
+
 Program::Program(SymbolTable *symbol_table, Statements *statements) {
 	this->symbol_table = symbol_table;
 	this->statements = statements;
@@ -31,6 +33,8 @@ void Program::print() {
 
 void Program::drop() {
 }
+
+//////////////// Statements ////////////////
 
 Statements::Statements(SymbolTable *symbol_table, Statement *statement, Statements *statements) {
 	this->symbol_table = symbol_table;
@@ -91,6 +95,8 @@ void Statements::print() {
 void Statements::drop() {
 }
 
+//////////////// Statement ////////////////
+
 Statement::Statement(SymbolTable *symbol_table, string ident, Expression *expression) {
 	this->symbol_table = symbol_table;
 	this->ident = ident;
@@ -132,6 +138,8 @@ void Statement::print() {
 
 void Statement::drop() {
 }
+
+//////////////// Expression ////////////////
 
 Expression::Expression(SymbolTable *symbol_table, Term *term, TermTail *term_tail) {
 	this->symbol_table = symbol_table;
@@ -191,11 +199,17 @@ void Expression::print() {
 void Expression::drop() {
 }
 
+//////////////// TermTail ////////////////
+
 TermTail::TermTail(SymbolTable *symbol_table, char add_or_sub, Term *term, TermTail *term_tail) {
 	this->symbol_table = symbol_table;
 	this->add_or_sub = add_or_sub;
 	this->term = term;
 	this->term_tail = term_tail;
+}
+
+char TermTail::get_add_or_sub() {
+	return add_or_sub;
 }
 
 void TermTail::analyze() {
@@ -251,9 +265,7 @@ void TermTail::print() {
 void TermTail::drop() {
 }
 
-char TermTail::get_add_or_sub() {
-	return add_or_sub;
-}
+//////////////// Term ////////////////
 
 Term::Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail) {
 	this->symbol_table = symbol_table;
@@ -313,11 +325,17 @@ void Term::print() {
 void Term::drop() {
 }
 
+//////////////// FacotTail ////////////////
+
 FactorTail::FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *factor, FactorTail *factor_tail) {
 	this->symbol_table = symbol_table;
 	this->mult_or_div = mult_or_div;
 	this->factor = factor;
 	this->factor_tail = factor_tail;
+}
+
+char FactorTail::get_mult_or_div() {
+	return mult_or_div;
 }
 
 void FactorTail::analyze() {
@@ -373,10 +391,7 @@ void FactorTail::print() {
 void FactorTail::drop() {
 }
 
-
-char FactorTail::get_mult_or_div() {
-	return mult_or_div;
-}
+//////////////// Factor ////////////////
 
 Factor::Factor(SymbolTable *symbol_table, Expression *expression, string ident, int number) {
 	this->symbol_table = symbol_table;
