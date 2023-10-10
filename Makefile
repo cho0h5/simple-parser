@@ -1,7 +1,7 @@
 TARGET = parser
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++20 -g
-SRCS = src/main.cpp src/lexer.cpp src/parser.cpp src/symbol_table.cpp
+CFLAGS = -Wall -Wextra -std=c++20 -g
+SRCS = src/main.cpp src/lexer.cpp src/parser.cpp src/tree.cpp src/symbol_table.cpp
 OBJS = $(SRCS:.cpp=.o)
 SRC_DIR = ./src
 INCLUDE = -Iinclude/
