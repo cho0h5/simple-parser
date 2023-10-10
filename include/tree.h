@@ -53,9 +53,11 @@ class Statements : public Tree {
 class Statement : public Tree {
 	string ident;
 	Expression *expression;
+	bool semi_colon;
 
 	public:
 	Statement(SymbolTable *symbol_table, string ident, Expression *expression);
+	void set_semi_colon();
 
 	virtual Container evaluate() override;
 	virtual int get_const_count() override;

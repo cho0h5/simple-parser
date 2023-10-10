@@ -17,7 +17,6 @@ int Program::get_op_count() {
 
 void Program::print() {
 	statements->print();
-	cout << '\n';
 }
 
 void Program::drop() {
@@ -43,7 +42,6 @@ int Statements::get_op_count() {
 void Statements::print() {
 	statement->print();
 	if (statements != NULL) {
-		cout << " ;\n";
 		statements->print();
 	}
 }
@@ -55,6 +53,11 @@ Statement::Statement(SymbolTable *symbol_table, string ident, Expression *expres
 	this->symbol_table = symbol_table;
 	this->ident = ident;
 	this->expression = expression;
+	this->semi_colon = false;
+}
+
+void Statement::set_semi_colon() {
+	semi_colon = true;
 }
 
 Container Statement::evaluate() {
@@ -70,6 +73,10 @@ int Statement::get_op_count() {
 void Statement::print() {
 	cout << ident << " := ";
 	expression->print();
+	if (semi_colon) {
+		cout << " ;";
+	}
+	cout << '\n';
 }
 
 void Statement::drop() {
