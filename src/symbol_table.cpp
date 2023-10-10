@@ -21,7 +21,7 @@ void Container::div(Container container) {
 }
 
 void Container::print() {
-	if (is_unknwon) {
+	if (is_unknown) {
 		cout << "Unknown";
 	} else {
 		cout << value;
