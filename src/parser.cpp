@@ -74,8 +74,6 @@ Factor *Parser::factor() {
 		if (lexer.get_next_token() == RIGHT_PAREN) {
 			lexer.lexical();
 			return new Factor(symbol_table, expr, "", 0);
-		} else {
-			cout << "error\n";	// error
 		}
 	} else if (lexer.get_next_token() == IDENT) {
 		if (symbol_table->is_exist(lexer.get_token_string()) == false) {
@@ -88,9 +86,9 @@ Factor *Parser::factor() {
 		int number = stoi(lexer.get_token_string());
 		lexer.lexical();
 		return new Factor(symbol_table, NULL, "", number);
-	} else {
-		cout << "error\n";	// error
 	}
+	cout << "error\n";	// error
+	return NULL;
 }
 
 Parser::Parser(Lexer lexer, SymbolTable *symbol_table) : lexer(std::move(lexer)), symbol_table(symbol_table) {
