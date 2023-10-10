@@ -8,11 +8,11 @@ class Tree {
 	SymbolTable *symbol_table;
 
 	public:
-	virtual Container evaluate();
-	virtual int get_const_count();
-	virtual int get_op_count();
-	virtual void print();
-	virtual void drop();
+	virtual Container evaluate() = 0;
+	virtual int get_const_count() = 0;
+	virtual int get_op_count() = 0;
+	virtual void print() = 0;
+	virtual void drop() = 0;
 };
 
 class Statements;
