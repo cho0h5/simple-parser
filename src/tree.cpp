@@ -13,12 +13,15 @@ Container Program::evaluate() {
 }
 
 int Program::get_id_count() {
+	return statements->get_id_count();
 }
 
 int Program::get_const_count() {
+	return statements->get_const_count();
 }
 
 int Program::get_op_count() {
+	return statements->get_op_count();
 }
 
 void Program::print() {
@@ -43,12 +46,27 @@ Container Statements::evaluate() {
 }
 
 int Statements::get_id_count() {
+	int count = statement->get_id_count();
+	if (statements != NULL) {
+		count += statements->get_id_count();
+	}
+	return count;
 }
 
 int Statements::get_const_count() {
+	int count = statement->get_const_count();
+	if (statements != NULL) {
+		count += statements->get_const_count();
+	}
+	return count;
 }
 
 int Statements::get_op_count() {
+	int count = statement->get_op_count();
+	if (statements != NULL) {
+		count += statements->get_op_count();
+	}
+	return count;
 }
 
 void Statements::print() {
@@ -80,12 +98,15 @@ Container Statement::evaluate() {
 }
 
 int Statement::get_id_count() {
+	return expression->get_id_count();
 }
 
 int Statement::get_const_count() {
+	return expression->get_const_count();
 }
 
 int Statement::get_op_count() {
+	return expression->get_const_count();
 }
 
 void Statement::print() {
@@ -124,12 +145,27 @@ Container Expression::evaluate() {
 }
 
 int Expression::get_id_count() {
+	int count = term->get_id_count();
+	if (term_tail != NULL) {
+		count += term_tail->get_id_count();
+	}
+	return count;
 }
 
 int Expression::get_const_count() {
+	int count = term->get_const_count();
+	if (term_tail != NULL) {
+		count += term_tail->get_const_count();
+	}
+	return count;
 }
 
 int Expression::get_op_count() {
+	int count = term->get_op_count();
+	if (term_tail != NULL) {
+		count += term_tail->get_op_count();
+	}
+	return count;
 }
 
 void Expression::print() {
@@ -168,12 +204,27 @@ Container TermTail::evaluate() {
 }
 
 int TermTail::get_id_count() {
+	int count = term->get_id_count();
+	if (term_tail != NULL) {
+		count += term_tail->get_id_count();
+	}
+	return count;
 }
 
 int TermTail::get_const_count() {
+	int count = term->get_const_count();
+	if (term_tail != NULL) {
+		count += term_tail->get_const_count();
+	}
+	return count;
 }
 
 int TermTail::get_op_count() {
+	int count = term->get_op_count();
+	if (term_tail != NULL) {
+		count += term_tail->get_op_count();
+	}
+	return count + 1;
 }
 
 void TermTail::print() {
@@ -216,12 +267,27 @@ Container Term::evaluate() {
 }
 
 int Term::get_id_count() {
+	int count = factor->get_id_count();
+	if (factor_tail != NULL) {
+		count += factor_tail->get_id_count();
+	}
+	return count;
 }
 
 int Term::get_const_count() {
+	int count = factor->get_const_count();
+	if (factor_tail != NULL) {
+		count += factor_tail->get_const_count();
+	}
+	return count;
 }
 
 int Term::get_op_count() {
+	int count = factor->get_op_count();
+	if (factor_tail != NULL) {
+		count += factor_tail->get_op_count();
+	}
+	return count;
 }
 
 void Term::print() {
@@ -260,12 +326,27 @@ Container FactorTail::evaluate() {
 }
 
 int FactorTail::get_id_count() {
+	int count = factor->get_id_count();
+	if (factor_tail != NULL) {
+		count += factor_tail->get_id_count();
+	}
+	return count;
 }
 
 int FactorTail::get_const_count() {
+	int count = factor->get_const_count();
+	if (factor_tail != NULL) {
+		count += factor_tail->get_const_count();
+	}
+	return count;
 }
 
 int FactorTail::get_op_count() {
+	int count = factor->get_op_count();
+	if (factor_tail != NULL) {
+		count += factor_tail->get_op_count();
+	}
+	return count + 1;
 }
 
 void FactorTail::print() {
@@ -305,12 +386,30 @@ Container Factor::evaluate() {
 }
 
 int Factor::get_id_count() {
+	if (expression != NULL) {
+		return 0;
+	} else if (ident.length() != 0) {
+		return 1;
+	}
+	return 0;
 }
 
 int Factor::get_const_count() {
+	if (expression != NULL) {
+		return 0;
+	} else if (ident.length() != 0) {
+		return 0;
+	}
+	return 1;
 }
 
 int Factor::get_op_count() {
+	if (expression != NULL) {
+		return 0;
+	} else if (ident.length() != 0) {
+		return 0;
+	}
+	return 0;
 }
 
 void Factor::print() {
