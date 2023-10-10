@@ -7,7 +7,6 @@ Program *Parser::program() {
 
 Statements *Parser::statements() {
 	Statement *stmt = statement();
-	stmt->print();
 	if (lexer.get_next_token() == SEMI_COLON) {
 		stmt->set_semi_colon();
 		lexer.lexical();
