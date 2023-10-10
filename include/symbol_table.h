@@ -12,6 +12,7 @@ class Container {
 
 	public:
 	Container() : is_unknown(true), value(0) {}
+	Container(int value) : is_unknown(false), value(value) {}
 
 	void add(Container container);
 	void sub(Container container);
