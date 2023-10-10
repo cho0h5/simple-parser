@@ -10,6 +10,7 @@ class Tree {
 	public:
 	virtual void analyze() = 0;
 	virtual Container evaluate() = 0;
+	virtual int get_id_count() = 0;
 	virtual int get_const_count() = 0;
 	virtual int get_op_count() = 0;
 	virtual void print() = 0;
@@ -32,6 +33,7 @@ class Program : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
@@ -47,6 +49,7 @@ class Statements : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
@@ -64,6 +67,7 @@ class Statement : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
@@ -79,6 +83,7 @@ class Expression : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
@@ -96,6 +101,7 @@ class TermTail : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
@@ -111,6 +117,7 @@ class Term : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
@@ -128,6 +135,7 @@ class FactorTail : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
@@ -144,6 +152,7 @@ class Factor : public Tree {
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
+	virtual int get_id_count() override;
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;

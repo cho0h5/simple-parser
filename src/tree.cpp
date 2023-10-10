@@ -12,6 +12,9 @@ Container Program::evaluate() {
 	statements->evaluate();
 }
 
+int Program::get_id_count() {
+}
+
 int Program::get_const_count() {
 }
 
@@ -37,6 +40,9 @@ void Statements::analyze() {
 Container Statements::evaluate() {
 	statement->evaluate();
 	statements->evaluate();
+}
+
+int Statements::get_id_count() {
 }
 
 int Statements::get_const_count() {
@@ -71,6 +77,9 @@ void Statement::analyze() {
 
 Container Statement::evaluate() {
 	symbol_table->set_value(ident, expression->evaluate());
+}
+
+int Statement::get_id_count() {
 }
 
 int Statement::get_const_count() {
@@ -114,6 +123,9 @@ Container Expression::evaluate() {
 	return container1;
 }
 
+int Expression::get_id_count() {
+}
+
 int Expression::get_const_count() {
 }
 
@@ -153,6 +165,9 @@ Container TermTail::evaluate() {
 	}
 
 	return container1;
+}
+
+int TermTail::get_id_count() {
 }
 
 int TermTail::get_const_count() {
@@ -200,6 +215,9 @@ Container Term::evaluate() {
 	return container1;
 }
 
+int Term::get_id_count() {
+}
+
 int Term::get_const_count() {
 }
 
@@ -239,6 +257,9 @@ Container FactorTail::evaluate() {
 	}
 
 	return container1;
+}
+
+int FactorTail::get_id_count() {
 }
 
 int FactorTail::get_const_count() {
@@ -283,6 +304,9 @@ Container Factor::evaluate() {
 	return Container(number);
 }
 
+int Factor::get_id_count() {
+}
+
 int Factor::get_const_count() {
 }
 
@@ -303,4 +327,3 @@ void Factor::print() {
 
 void Factor::drop() {
 }
-
