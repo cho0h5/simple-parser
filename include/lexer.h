@@ -43,6 +43,7 @@ class Lexer {
 	void lexical();
 	Terminal get_next_token();
 	string get_token_string();
+	void print_string();
 };
 
 #endif

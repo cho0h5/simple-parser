@@ -15,6 +15,7 @@ void Lexer::lexical() {
 	if (file.eof()) {
 		file.close();
 		next_token = END_OF_FILE;
+		print_string();
 		return;
 	}
 	while (next_char <= 32) {
@@ -22,6 +23,7 @@ void Lexer::lexical() {
 		if (file.eof()) {
 			file.close();
 			next_token = END_OF_FILE;
+			print_string();
 			return;
 		}
 	}
@@ -31,6 +33,7 @@ void Lexer::lexical() {
 			file.get(next_char);
 		}
 		next_token = CONST;
+		print_string();
 		return;
 	}
 	if (isalpha(next_char)) {
@@ -39,6 +42,7 @@ void Lexer::lexical() {
 			file.get(next_char);
 		}
 		next_token = IDENT;
+		print_string();
 		return;
 	}
 	if (next_char == ':') {
@@ -48,6 +52,7 @@ void Lexer::lexical() {
 			token_string.push_back(next_char);
 			file.get(next_char);
 			next_token = ASSIGNMENT_OP;
+			print_string();
 			return;
 		}
 		// 예외처리 필요
@@ -56,30 +61,35 @@ void Lexer::lexical() {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = SEMI_COLON;
+		print_string();
 		return;
 	}
 	if (next_char == '+' || next_char == '-') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = ADD_OP;
+		print_string();
 		return;
 	}
 	if (next_char == '*' || next_char == '/') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = MULT_OP;
+		print_string();
 		return;
 	}
 	if (next_char == '(') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = LEFT_PAREN;
+		print_string();
 		return;
 	}
 	if (next_char == ')') {
 		token_string.push_back(next_char);
 		file.get(next_char);
 		next_token = RIGHT_PAREN;
+		print_string();
 		return;
 	}
 	// 예외처리 필요
@@ -92,4 +102,8 @@ Terminal Lexer::get_next_token() {
 
 string Lexer::get_token_string() {
 	return token_string;
+}
+
+void Lexer::print_string() {
+	cout << get_token_string() << ' ';
 }
