@@ -85,8 +85,9 @@ Factor *Parser::factor() {
 		lexer.lexical();
 		return new Factor(symbol_table, NULL, lexer.get_token_string(), 0);
 	} else if (lexer.get_next_token() == CONST) {
+		int number = stoi(lexer.get_token_string());
 		lexer.lexical();
-		return new Factor(symbol_table, NULL, "", stoi(lexer.get_token_string()));
+		return new Factor(symbol_table, NULL, "", number);
 	} else {
 		cout << "error\n";	// error
 	}
