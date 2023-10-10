@@ -13,6 +13,7 @@ void Program::analyze() {
 
 Container Program::evaluate() {
 	statements->evaluate();
+	return NULL;
 }
 
 int Program::get_id_count() {
@@ -59,6 +60,7 @@ void Statements::analyze() {
 Container Statements::evaluate() {
 	statement->evaluate();
 	statements->evaluate();
+	return NULL;
 }
 
 int Statements::get_id_count() {
@@ -113,6 +115,7 @@ void Statement::analyze() {
 
 Container Statement::evaluate() {
 	symbol_table->set_value(ident, expression->evaluate());
+	return NULL;
 }
 
 int Statement::get_id_count() {
