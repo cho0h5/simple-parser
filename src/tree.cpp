@@ -6,6 +6,7 @@ Program::Program(SymbolTable *symbol_table, Statements *statements) {
 }
 
 void Program::analyze() {
+	statements->analyze();
 }
 
 Container Program::evaluate() {
@@ -38,6 +39,17 @@ Statements::Statements(SymbolTable *symbol_table, Statement *statement, Statemen
 }
 
 void Statements::analyze() {
+	statement->print();
+	cout << "ID: " << statement->get_id_count() << "; ";
+	cout << "CONST: " << statement->get_const_count() << "; ";
+	cout << "OP: " << statement->get_op_count() << "\n";
+
+	statement->analyze();
+
+	if (statements != NULL) {
+		cout << '\n';
+		statements->analyze();
+	}
 }
 
 Container Statements::evaluate() {
@@ -98,7 +110,7 @@ Container Statement::evaluate() {
 }
 
 int Statement::get_id_count() {
-	return expression->get_id_count();
+	return expression->get_id_count() + 1;
 }
 
 int Statement::get_const_count() {
@@ -106,7 +118,7 @@ int Statement::get_const_count() {
 }
 
 int Statement::get_op_count() {
-	return expression->get_const_count();
+	return expression->get_op_count();
 }
 
 void Statement::print() {

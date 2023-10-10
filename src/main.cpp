@@ -15,8 +15,4 @@ int main(int argc, char **argv) {
 
 	Tree *parse_tree = parser.parse();
 	parse_tree->analyze();
-	parse_tree->print();
-	cout << parse_tree->get_id_count() << '\n';
-	cout << parse_tree->get_const_count() << '\n';
-	cout << parse_tree->get_op_count() << '\n';
 }
