@@ -1,12 +1,15 @@
 #include <tree.h>
 
-Container Program::evaluate() {
-	statements->evaluate();
-}
-
 Program::Program(SymbolTable *symbol_table, Statements *statements) {
 	this->symbol_table = symbol_table;
 	this->statements = statements;
+}
+
+void Program::analyze() {
+}
+
+Container Program::evaluate() {
+	statements->evaluate();
 }
 
 int Program::get_const_count() {
@@ -26,6 +29,9 @@ Statements::Statements(SymbolTable *symbol_table, Statement *statement, Statemen
 	this->symbol_table = symbol_table;
 	this->statement = statement;
 	this->statements = statements;
+}
+
+void Statements::analyze() {
 }
 
 Container Statements::evaluate() {
@@ -60,6 +66,9 @@ void Statement::set_semi_colon() {
 	semi_colon = true;
 }
 
+void Statement::analyze() {
+}
+
 Container Statement::evaluate() {
 	symbol_table->set_value(ident, expression->evaluate());
 }
@@ -86,6 +95,9 @@ Expression::Expression(SymbolTable *symbol_table, Term *term, TermTail *term_tai
 	this->symbol_table = symbol_table;
 	this->term = term;
 	this->term_tail = term_tail;
+}
+
+void Expression::analyze() {
 }
 
 Container Expression::evaluate() {
@@ -124,6 +136,9 @@ TermTail::TermTail(SymbolTable *symbol_table, char add_or_sub, Term *term, TermT
 	this->add_or_sub = add_or_sub;
 	this->term = term;
 	this->term_tail = term_tail;
+}
+
+void TermTail::analyze() {
 }
 
 Container TermTail::evaluate() {
@@ -168,6 +183,9 @@ Term::Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail) {
 	this->factor_tail = factor_tail;
 }
 
+void Term::analyze() {
+}
+
 Container Term::evaluate() {
 	Container container1 = factor->evaluate();
 	if (factor_tail == NULL) return container1;
@@ -204,6 +222,9 @@ FactorTail::FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *fact
 	this->mult_or_div = mult_or_div;
 	this->factor = factor;
 	this->factor_tail = factor_tail;
+}
+
+void FactorTail::analyze() {
 }
 
 Container FactorTail::evaluate() {
@@ -248,6 +269,9 @@ Factor::Factor(SymbolTable *symbol_table, Expression *expression, string ident, 
 	this->expression = expression;
 	this->ident = ident;
 	this->number = number;
+}
+
+void Factor::analyze() {
 }
 
 Container Factor::evaluate() {
