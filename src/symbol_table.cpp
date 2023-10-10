@@ -1,5 +1,33 @@
 #include <symbol_table.h>
 
+void Container::add(Container container) {
+	is_unknown = is_unknown & container.is_unknown;
+	value = value + container.value;
+}
+
+void Container::sub(Container container) {
+	is_unknown = is_unknown & container.is_unknown;
+	value = value - container.value;
+}
+
+void Container::mult(Container container) {
+	is_unknown = is_unknown & container.is_unknown;
+	value = value * container.value;
+}
+
+void Container::div(Container container) {
+	is_unknown = is_unknown & container.is_unknown;
+	value = value / container.value;
+}
+
+void Container::print() {
+	if (is_unknwon) {
+		cout << "Unknown";
+	} else {
+		cout << value;
+	}
+}
+
 bool SymbolTable::is_exist(string ident) {
 	return table.contains(ident);
 }
@@ -19,4 +47,8 @@ int SymbolTable::get_value(string ident) {
 void SymbolTable::set_value(string ident, int value) {
 	table[ident].is_unknown = false;
 	table[ident].value = value;
+}
+
+void SymbolTable::update(string ident, Container container) {
+	table[ident] = container;
 }
