@@ -16,6 +16,7 @@ int Program::get_op_count() {
 }
 
 void Program::print() {
+	statements->print();
 }
 
 void Program::drop() {
@@ -39,6 +40,11 @@ int Statements::get_op_count() {
 }
 
 void Statements::print() {
+	statement->print();
+	if (statements != NULL) {
+		cout << ";\n";
+		statements->print();
+	}
 }
 
 void Statements::drop() {
@@ -61,6 +67,8 @@ int Statement::get_op_count() {
 }
 
 void Statement::print() {
+	cout << ident << " := ";
+	expression->print();
 }
 
 void Statement::drop() {
@@ -93,6 +101,11 @@ int Expression::get_op_count() {
 }
 
 void Expression::print() {
+	term->print();
+	if (term_tail != NULL) {
+		cout << ' ';
+		term_tail->print();
+	}
 }
 
 void Expression::drop() {
@@ -126,6 +139,12 @@ int TermTail::get_op_count() {
 }
 
 void TermTail::print() {
+	cout << add_or_sub << ' ';
+	term->print();
+	if (term_tail != NULL) {
+		cout << ' ';
+		term_tail->print();
+	}
 }
 
 void TermTail::drop() {
@@ -162,6 +181,11 @@ int Term::get_op_count() {
 }
 
 void Term::print() {
+	factor->print();
+	if (factor_tail != NULL) {
+		cout << ' ';
+		factor_tail->print();
+	}
 }
 
 void Term::drop() {
@@ -195,6 +219,12 @@ int FactorTail::get_op_count() {
 }
 
 void FactorTail::print() {
+	cout << mult_or_div << ' ';
+	factor->print();
+	if (factor_tail != NULL) {
+		cout << ' ';
+		factor_tail->print();
+	}
 }
 
 void FactorTail::drop() {
@@ -228,6 +258,13 @@ int Factor::get_op_count() {
 }
 
 void Factor::print() {
+	if (expression != NULL) {
+		expression->print();
+	} else if (ident.length() != 0) {
+		cout << ident << ' ';
+	} else {
+		cout << number << ' ';
+	}
 }
 
 void Factor::drop() {
