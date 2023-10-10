@@ -25,12 +25,9 @@ class SymbolTable {
 
 	public:
 	bool is_exist(string ident);
-	bool get_is_unknown(string ident);
 	void add_ident(string ident);
-	int get_value(string ident);
-	void set_value(string ident, int value);
-
-	void update(string ident, Container container);
+	Container get_value(string ident);
+	void set_value(string ident, Container container);
 };
 
 #endif

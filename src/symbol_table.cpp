@@ -32,23 +32,14 @@ bool SymbolTable::is_exist(string ident) {
 	return table.contains(ident);
 }
 
-bool SymbolTable::get_is_unknown(string ident) {
-	return table[ident].is_unknown;
-}
-
 void SymbolTable::add_ident(string ident) {
 	table[ident] = Container();
 }
 
 int SymbolTable::get_value(string ident) {
-	return table[ident].value;
+	return table[ident];
 }
 
-void SymbolTable::set_value(string ident, int value) {
-	table[ident].is_unknown = false;
-	table[ident].value = value;
-}
-
-void SymbolTable::update(string ident, Container container) {
+void SymbolTable::set_value(string ident, Container container) {
 	table[ident] = container;
 }
