@@ -1,22 +1,22 @@
 #include <symbol_table.h>
 
 void Container::add(Container container) {
-	is_unknown = is_unknown && container.is_unknown;
+	is_unknown = is_unknown || container.is_unknown;
 	value = value + container.value;
 }
 
 void Container::sub(Container container) {
-	is_unknown = is_unknown && container.is_unknown;
+	is_unknown = is_unknown || container.is_unknown;
 	value = value - container.value;
 }
 
 void Container::mult(Container container) {
-	is_unknown = is_unknown && container.is_unknown;
+	is_unknown = is_unknown || container.is_unknown;
 	value = value * container.value;
 }
 
 void Container::div(Container container) {
-	is_unknown = is_unknown && container.is_unknown;
+	is_unknown = is_unknown || container.is_unknown;
 	value = value / container.value;
 }
 
