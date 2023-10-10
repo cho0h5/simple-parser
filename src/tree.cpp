@@ -111,6 +111,8 @@ void Statement::set_semi_colon() {
 }
 
 void Statement::analyze() {
+	expression->analyze();
+	symbol_table->add_ident(ident);
 }
 
 Container Statement::evaluate() {
@@ -151,6 +153,10 @@ Expression::Expression(SymbolTable *symbol_table, Term *term, TermTail *term_tai
 }
 
 void Expression::analyze() {
+	term->analyze();
+	if (term_tail != NULL) {
+		term_tail->analyze();
+	}
 }
 
 Container Expression::evaluate() {
@@ -216,6 +222,10 @@ char TermTail::get_add_or_sub() {
 }
 
 void TermTail::analyze() {
+	term->analyze();
+	if (term_tail != NULL) {
+		term_tail->analyze();
+	}
 }
 
 Container TermTail::evaluate() {
@@ -277,6 +287,10 @@ Term::Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail) {
 }
 
 void Term::analyze() {
+	factor->analyze();
+	if (factor_tail != NULL) {
+		factor_tail->analyze();
+	}
 }
 
 Container Term::evaluate() {
@@ -342,6 +356,10 @@ char FactorTail::get_mult_or_div() {
 }
 
 void FactorTail::analyze() {
+	factor->analyze();
+	if (factor_tail != NULL) {
+		factor_tail->analyze();
+	}
 }
 
 Container FactorTail::evaluate() {
@@ -404,6 +422,12 @@ Factor::Factor(SymbolTable *symbol_table, Expression *expression, string ident, 
 }
 
 void Factor::analyze() {
+	if (expression != NULL) {
+		expression->analyze();
+	} else if (ident.length() != 0 && !symbol_table->is_exist(ident)) {
+		symbol_table->add_ident(ident);
+		cout << "(Error) undefined identifier (" << ident << ")\n";
+	}
 }
 
 Container Factor::evaluate() {
