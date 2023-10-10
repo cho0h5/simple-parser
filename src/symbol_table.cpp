@@ -36,7 +36,7 @@ void SymbolTable::add_ident(string ident) {
 	table[ident] = Container();
 }
 
-int SymbolTable::get_value(string ident) {
+Container SymbolTable::get_value(string ident) {
 	return table[ident];
 }
 
