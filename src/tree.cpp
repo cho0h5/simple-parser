@@ -387,7 +387,7 @@ Container Factor::evaluate() {
 
 int Factor::get_id_count() {
 	if (expression != NULL) {
-		return 0;
+		return expression->get_id_count();
 	} else if (ident.length() != 0) {
 		return 1;
 	}
@@ -396,7 +396,7 @@ int Factor::get_id_count() {
 
 int Factor::get_const_count() {
 	if (expression != NULL) {
-		return 0;
+		return expression->get_const_count();
 	} else if (ident.length() != 0) {
 		return 0;
 	}
@@ -405,7 +405,7 @@ int Factor::get_const_count() {
 
 int Factor::get_op_count() {
 	if (expression != NULL) {
-		return 0;
+		return expression->get_op_count();
 	} else if (ident.length() != 0) {
 		return 0;
 	}
