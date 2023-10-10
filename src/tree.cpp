@@ -59,7 +59,9 @@ void Statements::analyze() {
 
 Container Statements::evaluate() {
 	statement->evaluate();
-	statements->evaluate();
+	if (statements != NULL) {
+		statements->evaluate();
+	}
 	return NULL;
 }
 

@@ -43,3 +43,13 @@ Container SymbolTable::get_value(string ident) {
 void SymbolTable::set_value(string ident, Container container) {
 	table[ident] = container;
 }
+
+void SymbolTable::print_result() {
+	cout << "\nResult ==> ";
+	for (auto e : table) {
+		cout << e.first << ": ";
+		e.second.print();
+		cout << "; ";
+	}
+	cout << '\n';
+}

@@ -29,6 +29,7 @@ class SymbolTable {
 	void add_ident(string ident);
 	Container get_value(string ident);
 	void set_value(string ident, Container container);
+	void print_result();
 };
 
 #endif
