@@ -1,67 +1,142 @@
 #ifndef TREE_H
 #define TREE_H
 
-enum ProductionRule {
-	FIRST,
-	SECOND,
-	THIRD,
-}
+#include <symbol_table.h>
 
 class Tree {
-	SymbolTable symbol_table;
+	protected:
+	SymbolTable *symbol_table;
 
 	public:
-	virtual int evaluate();
+	virtual Container evaluate();
 	virtual int get_const_count();
 	virtual int get_op_count();
 	virtual void print();
 	virtual void drop();
-}
+};
+
+class Statements;
+class Statement;
+class Expression;
+class Term;
+class TermTail;
+class Factor;
+class FactorTail;
 
 class Program : public Tree {
-	Statements statements;
-}
+	Statements *statements;
+
+	public:
+	Program(SymbolTable *symbol_table, Statements *statements);
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 class Statements : public Tree {
-	ProductionRule rule;
-	Statement statement;
-	Statements statements;
-}
+	Statement *statement;
+	Statements *statements;
+
+	public:
+	Statements(SymbolTable *symbol_table, Statement *statement, Statements *statements);
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 class Statement : public Tree {
 	string ident;
-	Expression expression;
-}
+	Expression *expression;
+
+	public:
+	Statement(SymbolTable *symbol_table, string ident, Expression *expression);
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 class Expression : public Tree {
-	Term term;
-	TermTail term_tail;
-}
+	Term *term;
+	TermTail *term_tail;
+
+	public:
+	Expression(SymbolTable *symbol_table, Term *term, TermTail *term_tail);
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 class TermTail : public Tree {
-	ProductionRule rule;
 	char add_or_sub;
-	Term term;
-	TermTail term_tail;
-}
+	Term *term;
+	TermTail *term_tail;
+
+	public:
+	TermTail(SymbolTable *symbol_table, char add_or_sub, Term *term, TermTail *term_tail);
+	char get_add_or_sub();
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 class Term : public Tree {
-	Factor factor;
-	FactorTail factor_tail;
-}
+	Factor *factor;
+	FactorTail *factor_tail;
+
+	public:
+	Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail);
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 class FactorTail : public Tree {
-	ProductionRule rule;
 	char mult_or_div;
-	Factor factor;
-	FactorTail factor_tail;
-}
+	Factor *factor;
+	FactorTail *factor_tail;
+
+	public:
+	FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *factor, FactorTail *factor_tail);
+	char get_mult_or_div();
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 class Factor : public Tree {
-	ProductionRule rule;
-	Expression expression;
+	Expression *expression;
 	string ident;
-	int const;
-}
+	int number;
+
+	public:
+	Factor(SymbolTable *symbol_table, Expression *expression, string ident, int number);
+
+	virtual Container evaluate() override;
+	virtual int get_const_count() override;
+	virtual int get_op_count() override;
+	virtual void print() override;
+	virtual void drop() override;
+};
 
 #endif
