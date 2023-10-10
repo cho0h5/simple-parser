@@ -17,6 +17,7 @@ int Program::get_op_count() {
 
 void Program::print() {
 	statements->print();
+	cout << '\n';
 }
 
 void Program::drop() {
@@ -42,7 +43,7 @@ int Statements::get_op_count() {
 void Statements::print() {
 	statement->print();
 	if (statements != NULL) {
-		cout << ";\n";
+		cout << " ;\n";
 		statements->print();
 	}
 }
@@ -259,11 +260,13 @@ int Factor::get_op_count() {
 
 void Factor::print() {
 	if (expression != NULL) {
+		cout << '(';
 		expression->print();
+		cout << ')';
 	} else if (ident.length() != 0) {
-		cout << ident << ' ';
+		cout << ident;
 	} else {
-		cout << number << ' ';
+		cout << number;
 	}
 }
 

@@ -19,7 +19,7 @@ Statement *Parser::statement() {
 	string ident;
 	if (lexer.get_next_token() == IDENT) {
 		ident = lexer.get_token_string();
-		symbol_table->add_ident(lexer.get_token_string());
+		symbol_table->add_ident(ident);
 		lexer.lexical();
 	} else {
 		cout << "error\n";	// error
@@ -76,12 +76,13 @@ Factor *Parser::factor() {
 			return new Factor(symbol_table, expr, "", 0);
 		}
 	} else if (lexer.get_next_token() == IDENT) {
-		if (symbol_table->is_exist(lexer.get_token_string()) == false) {
-			cout << "error: undefined ident (" << lexer.get_token_string() << ")\n";	// error: undefined ident
-			symbol_table->add_ident(lexer.get_token_string());
+		string ident = lexer.get_token_string();
+		if (symbol_table->is_exist(ident) == false) {
+			cout << "error: undefined ident (" << ident << ")\n";	// error: undefined ident
+			symbol_table->add_ident(ident);
 		}
 		lexer.lexical();
-		return new Factor(symbol_table, NULL, lexer.get_token_string(), 0);
+		return new Factor(symbol_table, NULL, ident, 0);
 	} else if (lexer.get_next_token() == CONST) {
 		int number = stoi(lexer.get_token_string());
 		lexer.lexical();
