@@ -29,7 +29,7 @@ void Container::print() {
 }
 
 bool SymbolTable::is_exist(string ident) {
-	return table.contains(ident);
+	return table.count(ident) > 0;
 }
 
 void SymbolTable::add_ident(string ident) {
