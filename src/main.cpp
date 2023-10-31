@@ -1,5 +1,3 @@
-// (waring) (error) 출력 위치 바꾸기
-
 #include <iostream>
 
 #include <lexer.h>
