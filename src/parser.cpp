@@ -22,12 +22,12 @@ Statement *Parser::statement() {
 		ident = lexer.get_token_string();
 		lexer.lexical();
 	} else {
-		cout << "error\n";	// error
+		cout << "error1\n";	// error
 	}
 	if (lexer.get_next_token() == ASSIGNMENT_OP) {
 		lexer.lexical();
 	} else {
-		cout << "error\n";	// error
+		cout << "error2\n";	// error
 	}
 	Expression *expr = expression();
 	return new Statement(symbol_table, ident, expr);
@@ -68,23 +68,35 @@ FactorTail *Parser::factor_tail() {
 }
 
 Factor *Parser::factor() {
-	if (lexer.get_next_token() == LEFT_PAREN) {
-		lexer.lexical();
-		Expression *expr = expression();
-		if (lexer.get_next_token() == RIGHT_PAREN) {
+	for (;;) {
+		if (lexer.get_next_token() == LEFT_PAREN) {
 			lexer.lexical();
-			return new Factor(symbol_table, expr, "", 0);
+			Expression *expr = expression();
+			if (lexer.get_next_token() == RIGHT_PAREN) {
+				lexer.lexical();
+				return new Factor(symbol_table, expr, "", 0);
+			}
+		} else if (lexer.get_next_token() == IDENT) {
+			string ident = lexer.get_token_string();
+			lexer.lexical();
+			return new Factor(symbol_table, NULL, ident, 0);
+		} else if (lexer.get_next_token() == CONST) {
+			int number = stoi(lexer.get_token_string());
+			lexer.lexical();
+			return new Factor(symbol_table, NULL, "", number);
 		}
-	} else if (lexer.get_next_token() == IDENT) {
-		string ident = lexer.get_token_string();
-		lexer.lexical();
-		return new Factor(symbol_table, NULL, ident, 0);
-	} else if (lexer.get_next_token() == CONST) {
-		int number = stoi(lexer.get_token_string());
-		lexer.lexical();
-		return new Factor(symbol_table, NULL, "", number);
+
+		if (lexer.get_next_token() == ADD_OP) {
+			cout << "(Warning) eliminate duplicated add (or sub) operator\n";
+			lexer.lexical();
+		} else if (lexer.get_next_token() == MULT_OP) {
+			cout << "(Warning) eliminate duplicated mult (or div) operator\n";
+			lexer.lexical();
+		} else {
+			break;
+		}
 	}
-	cout << "error\n";	// error
+	cout << "error3\n";	// error
 	return NULL;
 }
 
