@@ -8,13 +8,13 @@ class Tree {
 	SymbolTable *symbol_table;
 
 	public:
+	virtual ~Tree() {};
 	virtual void analyze() = 0;
 	virtual Container evaluate() = 0;
 	virtual int get_id_count() = 0;
 	virtual int get_const_count() = 0;
 	virtual int get_op_count() = 0;
 	virtual void print() = 0;
-	virtual void drop() = 0;
 };
 
 class Statements;
@@ -30,6 +30,7 @@ class Program : public Tree {
 
 	public:
 	Program(SymbolTable *symbol_table, Statements *statements);
+	virtual ~Program();
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
@@ -37,7 +38,6 @@ class Program : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 class Statements : public Tree {
@@ -46,6 +46,7 @@ class Statements : public Tree {
 
 	public:
 	Statements(SymbolTable *symbol_table, Statement *statement, Statements *statements);
+	virtual ~Statements();
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
@@ -53,7 +54,6 @@ class Statements : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 class Statement : public Tree {
@@ -63,6 +63,7 @@ class Statement : public Tree {
 
 	public:
 	Statement(SymbolTable *symbol_table, string ident, Expression *expression);
+	virtual ~Statement();
 	void set_semi_colon();
 
 	virtual void analyze() override;
@@ -71,7 +72,6 @@ class Statement : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 class Expression : public Tree {
@@ -80,6 +80,7 @@ class Expression : public Tree {
 
 	public:
 	Expression(SymbolTable *symbol_table, Term *term, TermTail *term_tail);
+	virtual ~Expression();
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
@@ -87,7 +88,6 @@ class Expression : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 class TermTail : public Tree {
@@ -97,6 +97,7 @@ class TermTail : public Tree {
 
 	public:
 	TermTail(SymbolTable *symbol_table, char add_or_sub, Term *term, TermTail *term_tail);
+	virtual ~TermTail();
 	char get_add_or_sub();
 
 	virtual void analyze() override;
@@ -105,7 +106,6 @@ class TermTail : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 class Term : public Tree {
@@ -114,6 +114,7 @@ class Term : public Tree {
 
 	public:
 	Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail);
+	virtual ~Term();
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
@@ -121,7 +122,6 @@ class Term : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 class FactorTail : public Tree {
@@ -131,6 +131,7 @@ class FactorTail : public Tree {
 
 	public:
 	FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *factor, FactorTail *factor_tail);
+	virtual ~FactorTail();
 	char get_mult_or_div();
 
 	virtual void analyze() override;
@@ -139,7 +140,6 @@ class FactorTail : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 class Factor : public Tree {
@@ -149,6 +149,7 @@ class Factor : public Tree {
 
 	public:
 	Factor(SymbolTable *symbol_table, Expression *expression, string ident, int number);
+	virtual ~Factor();
 
 	virtual void analyze() override;
 	virtual Container evaluate() override;
@@ -156,7 +157,6 @@ class Factor : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
-	virtual void drop() override;
 };
 
 #endif

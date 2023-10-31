@@ -32,7 +32,8 @@ void Program::print() {
 	statements->print();
 }
 
-void Program::drop() {
+Program::~Program() {
+	delete statements;
 }
 
 //////////////// Statements ////////////////
@@ -96,7 +97,9 @@ void Statements::print() {
 	}
 }
 
-void Statements::drop() {
+Statements::~Statements() {
+	delete statement;
+	delete statements;
 }
 
 //////////////// Statement ////////////////
@@ -143,7 +146,8 @@ void Statement::print() {
 	cout << '\n';
 }
 
-void Statement::drop() {
+Statement::~Statement() {
+	delete expression;
 }
 
 //////////////// Expression ////////////////
@@ -207,7 +211,9 @@ void Expression::print() {
 	}
 }
 
-void Expression::drop() {
+Expression::~Expression() {
+	delete term;
+	delete term_tail;
 }
 
 //////////////// TermTail ////////////////
@@ -277,7 +283,9 @@ void TermTail::print() {
 	}
 }
 
-void TermTail::drop() {
+TermTail::~TermTail() {
+	delete term;
+	delete term_tail;
 }
 
 //////////////// Term ////////////////
@@ -341,7 +349,9 @@ void Term::print() {
 	}
 }
 
-void Term::drop() {
+Term::~Term() {
+	delete factor;
+	delete factor_tail;
 }
 
 //////////////// FacotTail ////////////////
@@ -411,7 +421,9 @@ void FactorTail::print() {
 	}
 }
 
-void FactorTail::drop() {
+FactorTail::~FactorTail() {
+	delete factor;
+	delete factor_tail;
 }
 
 //////////////// Factor ////////////////
@@ -480,5 +492,6 @@ void Factor::print() {
 	}
 }
 
-void Factor::drop() {
+Factor::~Factor() {
+	delete expression;
 }

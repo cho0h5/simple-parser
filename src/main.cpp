@@ -14,7 +14,10 @@ int main(int argc, char **argv) {
 	Parser parser(std::move(lexer), &symbol_table);
 
 	Tree *parse_tree = parser.parse();
+
 	parse_tree->analyze();
 	parse_tree->evaluate();
 	symbol_table.print_result();
+
+	delete parse_tree;
 }
