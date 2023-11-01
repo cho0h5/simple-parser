@@ -61,6 +61,14 @@ void Lexer::lexical() {
 	if (next_char == '+' || next_char == '-') {
 		token_string.push_back(next_char);
 		file.get(next_char);
+		if (isdigit(next_char)) {
+			while (isdigit(next_char) && !file.eof()) {
+				token_string.push_back(next_char);
+				file.get(next_char);
+			}
+			next_token = CONST;
+			return;
+		}
 		next_token = ADD_OP;
 		return;
 	}
