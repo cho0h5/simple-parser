@@ -14,7 +14,7 @@ $ ./parser testcase/example1.txt
 - macOS 14.0 arm64 (clang 15.0.0, GNU Make 3.81)
 - Debian 11 aarch64 (g++ 10.2.1, GNU Make 4.3)
 
-## 예외처리
+## Exception Handling
 ### Error
 1. 선언되지 않은 `IDENT` 사용
 2. `Statement`에서 `ASSIGNMENT_OP`가 나오지 않는 경우
