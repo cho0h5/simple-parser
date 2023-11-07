@@ -329,20 +329,23 @@ TermTail::~TermTail() {
 
 //////////////// Term ////////////////
 
-Term::Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail) {
+Term::Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail, vector<string> messages) {
 	this->symbol_table = symbol_table;
 	this->factor = factor;
 	this->factor_tail = factor_tail;
+  this->messages = messages;
 }
 
 void Term::analyze() {
-	factor->analyze();
+  if (factor != NULL)
+    factor->analyze();
 	if (factor_tail != NULL) {
 		factor_tail->analyze();
 	}
 }
 
 Container Term::evaluate() {
+  if (factor == NULL) return Container();
 	Container container1 = factor->evaluate();
 	if (factor_tail == NULL) return container1;
 	Container container2 = factor_tail->evaluate();
@@ -357,6 +360,7 @@ Container Term::evaluate() {
 }
 
 int Term::get_id_count() {
+  if (factor == NULL) return 0;
 	int count = factor->get_id_count();
 	if (factor_tail != NULL) {
 		count += factor_tail->get_id_count();
@@ -365,6 +369,7 @@ int Term::get_id_count() {
 }
 
 int Term::get_const_count() {
+  if (factor == NULL) return 0;
 	int count = factor->get_const_count();
 	if (factor_tail != NULL) {
 		count += factor_tail->get_const_count();
@@ -373,6 +378,7 @@ int Term::get_const_count() {
 }
 
 int Term::get_op_count() {
+  if (factor == NULL) return 0;
 	int count = factor->get_op_count();
 	if (factor_tail != NULL) {
 		count += factor_tail->get_op_count();
@@ -381,7 +387,8 @@ int Term::get_op_count() {
 }
 
 void Term::print() {
-	factor->print();
+  if (factor != NULL)
+    factor->print();
 	if (factor_tail != NULL) {
 		cout << ' ';
 		factor_tail->print();
@@ -389,7 +396,10 @@ void Term::print() {
 }
 
 void Term::print_messages() {
-  factor->print_messages();
+  for (auto message: messages)
+    cout << message << '\n';
+  if (factor != NULL)
+    factor->print_messages();
   if (factor_tail != NULL) {
     factor_tail->print_messages();
   }
@@ -402,11 +412,12 @@ Term::~Term() {
 
 //////////////// FacotTail ////////////////
 
-FactorTail::FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *factor, FactorTail *factor_tail) {
+FactorTail::FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *factor, FactorTail *factor_tail, vector<string> messages) {
 	this->symbol_table = symbol_table;
 	this->mult_or_div = mult_or_div;
 	this->factor = factor;
 	this->factor_tail = factor_tail;
+  this->messages = messages;
 }
 
 char FactorTail::get_mult_or_div() {
@@ -468,6 +479,8 @@ void FactorTail::print() {
 }
 
 void FactorTail::print_messages() {
+  for (auto message: messages)
+    cout << message << '\n';
   factor->print_messages();
   if (factor_tail != NULL) {
     factor_tail->print_messages();

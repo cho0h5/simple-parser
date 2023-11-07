@@ -66,18 +66,24 @@ TermTail *Parser::term_tail() {
 }
 
 Term *Parser::term() {
+  vector<string> messages;
 	Factor *ft = factor();
+  if (ft == NULL)
+    messages.push_back("\e[31mFactor parsing error\e[37m");
 	FactorTail *fttl = factor_tail();
-	return new Term(symbol_table, ft, fttl);
+	return new Term(symbol_table, ft, fttl, messages);
 }
 
 FactorTail *Parser::factor_tail() {
+  vector<string> messages;
 	if (lexer.get_next_token() == MULT_OP) {
 		char mult_or_div = lexer.get_token_string().at(0);
 		lexer.lexical();
 		Factor *ft = factor();
+    if (ft == NULL)
+      messages.push_back("\e[31mFactor parsing error\e[37m");
 		FactorTail *fttl = factor_tail();
-		return new FactorTail(symbol_table, mult_or_div, ft, fttl);
+		return new FactorTail(symbol_table, mult_or_div, ft, fttl, messages);
 	}
 	return NULL;
 }

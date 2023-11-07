@@ -118,9 +118,10 @@ class TermTail : public Tree {
 class Term : public Tree {
 	Factor *factor;
 	FactorTail *factor_tail;
+  vector<string> messages;
 
 	public:
-	Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail);
+	Term(SymbolTable *symbol_table, Factor *factor, FactorTail *factor_tail, vector<string> messages);
 	virtual ~Term();
 
 	virtual void analyze() override;
@@ -137,9 +138,10 @@ class FactorTail : public Tree {
 	char mult_or_div;
 	Factor *factor;
 	FactorTail *factor_tail;
+  vector<string> messages;
 
 	public:
-	FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *factor, FactorTail *factor_tail);
+	FactorTail(SymbolTable *symbol_table, char mult_or_div, Factor *factor, FactorTail *factor_tail, vector<string> messages);
 	virtual ~FactorTail();
 	char get_mult_or_div();
 
