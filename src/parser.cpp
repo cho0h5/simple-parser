@@ -11,8 +11,9 @@ Statements *Parser::statements() {
 		return NULL;
 	}
 	Statement *stmt = statement();
-	if (lexer.get_next_token() == SEMI_COLON) {
-		lexer.lexical();
+	if (lexer.get_next_token() != END_OF_FILE) {
+    if (lexer.get_next_token() == SEMI_COLON)
+      lexer.lexical();
 		Statements *stmts = statements();
 		if (stmts != NULL && stmt != NULL)
 			stmt->set_semi_colon();
@@ -28,14 +29,17 @@ Statement *Parser::statement() {
 		lexer.lexical();
 	} else {
     cout << "(Error) IDENT expected but not found\n";
-    while (lexer.get_next_token() != SEMI_COLON)
+    while (lexer.get_next_token() != SEMI_COLON
+        && lexer.get_next_token() != END_OF_FILE)
       lexer.lexical();
+    return NULL;
 	}
 	if (lexer.get_next_token() == ASSIGNMENT_OP) {
 		lexer.lexical();
 	} else {
 		cout << "(Error) assignment operator is not found\n";	// error
-    while (lexer.get_next_token() != SEMI_COLON)
+    while (lexer.get_next_token() != SEMI_COLON
+        && lexer.get_next_token() != END_OF_FILE)
       lexer.lexical();
     return NULL;
 	}

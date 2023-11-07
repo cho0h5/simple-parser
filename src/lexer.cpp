@@ -91,7 +91,9 @@ void Lexer::lexical() {
 		next_token = RIGHT_PAREN;
 		return;
 	}
-	// 예외처리 필요
+  next_token = UNKNOWN;
+  file.get(next_char);
+  return;
 }
 
 
