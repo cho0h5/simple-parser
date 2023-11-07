@@ -1,6 +1,6 @@
 TARGET = parser
 CC = g++
-CFLAGS = -Wall -Wextra -Werror -std=c++14 -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -std=c++14
 SRCS = src/main.cpp src/lexer.cpp src/parser.cpp src/tree.cpp src/symbol_table.cpp
 OBJS = $(SRCS:.cpp=.o)
 SRC_DIR = ./src
