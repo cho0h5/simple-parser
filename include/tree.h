@@ -1,6 +1,8 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include <vector>
+
 #include <symbol_table.h>
 
 class Tree {
