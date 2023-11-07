@@ -43,9 +43,10 @@ class Program : public Tree {
 class Statements : public Tree {
 	Statement *statement;
 	Statements *statements;
+  vector<string> messages;
 
 	public:
-	Statements(SymbolTable *symbol_table, Statement *statement, Statements *statements);
+	Statements(SymbolTable *symbol_table, Statement *statement, Statements *statements, vector<string> messages);
 	virtual ~Statements();
 
 	virtual void analyze() override;
@@ -54,6 +55,8 @@ class Statements : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
+
+  void print_messages();
 };
 
 class Statement : public Tree {

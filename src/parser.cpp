@@ -6,20 +6,22 @@ Program *Parser::program() {
 }
 
 Statements *Parser::statements() {
+  vector<string> messages;
 	if (lexer.get_next_token() == END_OF_FILE) {
-		cout << "(Warning) you don't need semicolon at the end\n";
 		return NULL;
 	}
 	Statement *stmt = statement();
 	if (lexer.get_next_token() != END_OF_FILE) {
     if (lexer.get_next_token() == SEMI_COLON)
       lexer.lexical();
+    if (lexer.get_next_token() == END_OF_FILE)
+      messages.push_back("\e[33m(Warning) you don't need semicolon at the end\e[37m");
 		Statements *stmts = statements();
 		if (stmts != NULL && stmt != NULL)
 			stmt->set_semi_colon();
-		return new Statements(symbol_table, stmt, stmts);
+		return new Statements(symbol_table, stmt, stmts, messages);
 	}
-	return new Statements(symbol_table, stmt, NULL);
+	return new Statements(symbol_table, stmt, NULL, messages);
 }
 
 Statement *Parser::statement() {

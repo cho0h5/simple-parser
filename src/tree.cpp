@@ -38,15 +38,17 @@ Program::~Program() {
 
 //////////////// Statements ////////////////
 
-Statements::Statements(SymbolTable *symbol_table, Statement *statement, Statements *statements) {
+Statements::Statements(SymbolTable *symbol_table, Statement *statement, Statements *statements, vector<string> messages) {
 	this->symbol_table = symbol_table;
 	this->statement = statement;
 	this->statements = statements;
+  this->messages = messages;
 }
 
 void Statements::analyze() {
   statement->print();
   statement->print_messages();
+  print_messages();
   cout << "ID: " << statement->get_id_count() << "; ";
   cout << "CONST: " << statement->get_const_count() << "; ";
   cout << "OP: " << statement->get_op_count() << "\n";
@@ -96,6 +98,11 @@ void Statements::print() {
 	if (statements != NULL) {
 		statements->print();
 	}
+}
+
+void Statements::print_messages() {
+  for (auto message: messages)
+    cout << message << '\n';
 }
 
 Statements::~Statements() {
