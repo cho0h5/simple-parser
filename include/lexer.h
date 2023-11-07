@@ -40,6 +40,7 @@ class Lexer {
 
 	public:
 	Lexer(const char* filename);
+  bool is_open();
 
 	void lexical();
 	Terminal get_next_token();

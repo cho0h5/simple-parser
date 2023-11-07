@@ -10,6 +10,10 @@ Lexer::Lexer(const char* filename) {
 	file.get(next_char);
 }
 
+bool Lexer::is_open() {
+  return file.is_open();
+}
+
 void Lexer::lexical() {
 	token_string.clear();
 	if (file.eof()) {
