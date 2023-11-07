@@ -11,8 +11,11 @@ $ make
 $ ./parser testcase/example1.txt
 ```
 ## Test Environment
-- macOS 14.0 arm64 (clang 15.0.0, GNU Make 3.81)
-- Debian 11 aarch64 (g++ 10.2.1, GNU Make 4.3)
+| OS | Architecture | Compiler | Make |
+| --- | --- | --- | --- |
+| macOS 14.0 | arm64 | clang 15.0.0 | GNU Make 3.81 |
+| Debian 11 | aarch64 | g++ 10.2.1 | GNU Make 4.3 |
+| Rocky Linux 9.2 | x86_64 | g++ 11.3.1 | GNU Make 4.3 |
 
 ## Exception Handling
 ### Error
