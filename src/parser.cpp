@@ -14,6 +14,8 @@ Statements *Parser::statements() {
 	if (lexer.get_next_token() != END_OF_FILE) {
     if (lexer.get_next_token() == SEMI_COLON)
       lexer.lexical();
+    else if (lexer.get_next_token() != END_OF_FILE)
+      messages.push_back("\e[33m(Warning) expected semicolon\e[37m");
     if (lexer.get_next_token() == END_OF_FILE)
       messages.push_back("\e[33m(Warning) you don't need semicolon at the end\e[37m");
 		Statements *stmts = statements();
