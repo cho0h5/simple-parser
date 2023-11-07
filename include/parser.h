@@ -11,21 +11,21 @@
 using namespace std;
 
 class Parser {
-	Lexer lexer;
-	SymbolTable *symbol_table;
+  Lexer lexer;
+  SymbolTable *symbol_table;
 
-	Program *program();
-	Statements *statements();
-	Statement *statement();
-	Expression *expression();
-	TermTail *term_tail();
-	Term *term();
-	FactorTail *factor_tail();
-	Factor *factor();
+  Program *program();
+  Statements *statements();
+  Statement *statement();
+  Expression *expression();
+  TermTail *term_tail();
+  Term *term();
+  FactorTail *factor_tail();
+  Factor *factor();
 
-	public:
-	Parser(Lexer lexer, SymbolTable *symbol_table);
-	Tree *parse();
+  public:
+  Parser(Lexer lexer, SymbolTable *symbol_table);
+  Tree *parse();
 };
 
 #endif

@@ -7,29 +7,29 @@
 using namespace std;
 
 class Container {
-	bool is_unknown;
-	int	value;
+  bool is_unknown;
+  int	value;
 
-	public:
-	Container() : is_unknown(true), value(0) {}
-	Container(int value) : is_unknown(false), value(value) {}
+  public:
+  Container() : is_unknown(true), value(0) {}
+  Container(int value) : is_unknown(false), value(value) {}
 
-	void add(Container container);
-	void sub(Container container);
-	void mult(Container container);
-	void div(Container container);
-	void print();
+  void add(Container container);
+  void sub(Container container);
+  void mult(Container container);
+  void div(Container container);
+  void print();
 };
 
 class SymbolTable {
-	map<string, Container> table;
+  map<string, Container> table;
 
-	public:
-	bool is_exist(string ident);
-	void add_ident(string ident);
-	Container get_value(string ident);
-	void set_value(string ident, Container container);
-	void print_result();
+  public:
+  bool is_exist(string ident);
+  void add_ident(string ident);
+  Container get_value(string ident);
+  void set_value(string ident, Container container);
+  void print_result();
 };
 
 #endif
