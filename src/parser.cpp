@@ -27,7 +27,9 @@ Statement *Parser::statement() {
 		ident = lexer.get_token_string();
 		lexer.lexical();
 	} else {
-		cout << "error1\n";	// error
+    cout << "(Error) IDENT expected but not found\n";
+    while (lexer.get_next_token() != SEMI_COLON)
+      lexer.lexical();
 	}
 	if (lexer.get_next_token() == ASSIGNMENT_OP) {
 		lexer.lexical();
