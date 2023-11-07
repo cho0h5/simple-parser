@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
 }
 ```
 ## `include/lexer.h`
+### `Terminal`
 ```cpp
 enum Terminal {
   CONST,          // any decimal numbers
@@ -37,7 +38,9 @@ enum Terminal {
   END_OF_FILE,    // EOF
   UNKNOWN,        // unknown token
 };
-
+```
+### `Lexer`
+```cpp
 // 어휘 분석을 해주는 class
 class Lexer {
   ifstream file;
@@ -58,6 +61,7 @@ class Lexer {
 ```
 
 ## `include/symbol_table.h`
+### `Container`
 ```cpp
 // 변수의 값을 표현하는 class. Unknown과 정수형 표현 가능
 class Container {
@@ -74,7 +78,9 @@ class Container {
   void div(Container container);
   void print();                   // 값 출력
 };
-
+```
+### `SymbolTable`
+```cpp
 // 변수들의 값을 담는 class
 class SymbolTable {
   map<string, Container> table;
@@ -85,5 +91,28 @@ class SymbolTable {
   Container get_value(string ident);                  // 해당 변수의 값 반환
   void set_value(string ident, Container container);  // 해당 변수의 값 변경
   void print_result();                                // 모든 변수의 값 출력
+};
+```
+## `include/parser.h`
+### `Parser`
+```cpp
+// lexer로부터 token들을 얻어와 parse_tree를 생성하는 class
+class Parser {
+  Lexer lexer;
+  SymbolTable *symbol_table;
+
+  // 각 non-terminal들을 파싱한 후 tree를 생성하여 반환
+  Program *program();
+  Statements *statements();
+  Statement *statement();
+  Expression *expression();
+  TermTail *term_tail();
+  Term *term();
+  FactorTail *factor_tail();
+  Factor *factor();
+
+  public:
+  Parser(Lexer lexer, SymbolTable *symbol_table);
+  Tree *parse();  // 전체 코드 parsing
 };
 ```
