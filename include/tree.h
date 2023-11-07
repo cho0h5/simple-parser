@@ -60,9 +60,10 @@ class Statement : public Tree {
 	string ident;
 	Expression *expression;
 	bool semi_colon;
+  vector<string> messages;
 
 	public:
-	Statement(SymbolTable *symbol_table, string ident, Expression *expression);
+	Statement(SymbolTable *symbol_table, string ident, Expression *expression, vector<string> messages);
 	virtual ~Statement();
 	void set_semi_colon();
 

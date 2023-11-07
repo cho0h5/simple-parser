@@ -113,11 +113,12 @@ Statements::~Statements() {
 
 //////////////// Statement ////////////////
 
-Statement::Statement(SymbolTable *symbol_table, string ident, Expression *expression) {
+Statement::Statement(SymbolTable *symbol_table, string ident, Expression *expression, vector<string> messages) {
 	this->symbol_table = symbol_table;
 	this->ident = ident;
 	this->expression = expression;
 	this->semi_colon = false;
+  this->messages = messages;
 }
 
 void Statement::set_semi_colon() {

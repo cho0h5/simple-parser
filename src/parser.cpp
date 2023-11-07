@@ -23,6 +23,7 @@ Statements *Parser::statements() {
 }
 
 Statement *Parser::statement() {
+  vector<string> messages;
 	string ident;
 	if (lexer.get_next_token() == IDENT) {
 		ident = lexer.get_token_string();
@@ -44,7 +45,7 @@ Statement *Parser::statement() {
     return NULL;
 	}
 	Expression *expr = expression();
-	return new Statement(symbol_table, ident, expr);
+	return new Statement(symbol_table, ident, expr, messages);
 }
 
 Expression *Parser::expression() {
