@@ -14,7 +14,7 @@ Statements *Parser::statements() {
 	if (lexer.get_next_token() == SEMI_COLON) {
 		lexer.lexical();
 		Statements *stmts = statements();
-		if (stmts != NULL)
+		if (stmts != NULL && stmt != NULL)
 			stmt->set_semi_colon();
 		return new Statements(symbol_table, stmt, stmts);
 	}
@@ -32,7 +32,10 @@ Statement *Parser::statement() {
 	if (lexer.get_next_token() == ASSIGNMENT_OP) {
 		lexer.lexical();
 	} else {
-		cout << "error2\n";	// error
+		cout << "(Error) assignment operator is not found\n";	// error
+    while (lexer.get_next_token() != SEMI_COLON)
+      lexer.lexical();
+    return NULL;
 	}
 	Expression *expr = expression();
 	return new Statement(symbol_table, ident, expr);

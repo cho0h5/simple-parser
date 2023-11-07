@@ -50,7 +50,8 @@ void Lexer::lexical() {
 			next_token = ASSIGNMENT_OP;
 			return;
 		}
-		// 예외처리 필요
+    next_token = UNKNOWN;
+    return;
 	}
 	if (next_char == ';') {
 		token_string.push_back(next_char);

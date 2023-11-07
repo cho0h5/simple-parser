@@ -45,12 +45,19 @@ Statements::Statements(SymbolTable *symbol_table, Statement *statement, Statemen
 }
 
 void Statements::analyze() {
-	statement->print();
-	cout << "ID: " << statement->get_id_count() << "; ";
-	cout << "CONST: " << statement->get_const_count() << "; ";
-	cout << "OP: " << statement->get_op_count() << "\n";
+  if (statement != NULL) {
+    statement->print();
+    cout << "ID: " << statement->get_id_count() << "; ";
+    cout << "CONST: " << statement->get_const_count() << "; ";
+    cout << "OP: " << statement->get_op_count() << "\n";
 
-	statement->analyze();
+    statement->analyze();
+  } else  {
+    cout << "This statement is not parsed\n";
+    cout << "ID: " << 0 << "; ";
+    cout << "CONST: " << 0 << "; ";
+    cout << "OP: " << 0 << "\n";
+  }
 
 	if (statements != NULL) {
 		cout << '\n';
@@ -59,7 +66,8 @@ void Statements::analyze() {
 }
 
 Container Statements::evaluate() {
-	statement->evaluate();
+  if (statement != NULL)
+    statement->evaluate();
 	if (statements != NULL) {
 		statements->evaluate();
 	}

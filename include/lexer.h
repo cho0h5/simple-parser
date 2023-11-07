@@ -18,15 +18,16 @@ enum Nonterminal {
 };
 
 enum Terminal {
-	CONST,			// any decimal numbers
-	IDENT,			// any names conforming to C identifier rule
-	ASSIGNMENT_OP,	// :=
-	SEMI_COLON,		// ;
-	ADD_OP,			// + | -
-	MULT_OP,		// * | /
-	LEFT_PAREN,		// (
-	RIGHT_PAREN,	// )
-	END_OF_FILE,	// EOF
+	CONST,        // any decimal numbers
+	IDENT,        // any names conforming to C identifier rule
+	ASSIGNMENT_OP,// :=
+	SEMI_COLON,   // ;
+	ADD_OP,       // + | -
+	MULT_OP,      // * | /
+	LEFT_PAREN,   // (
+	RIGHT_PAREN,  // )
+	END_OF_FILE,  // EOF
+  UNKNOWN,      // unknown token
 };
 
 class Lexer {
