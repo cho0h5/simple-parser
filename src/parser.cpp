@@ -118,7 +118,6 @@ Factor *Parser::factor() {
 			break;
 		}
 	}
-	cout << "error3\n";	// error
 	return NULL;
 }
 
