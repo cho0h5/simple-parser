@@ -6,17 +6,6 @@
 
 using namespace std;
 
-enum Nonterminal {
-  PROGRAM,
-  STATEMENTS,
-  STATEMENT,
-  EXPRESSION,
-  TERM,
-  TERM_TAIL,
-  FACTOR,
-  FACTOR_TAIL,
-};
-
 enum Terminal {
   CONST,        // any decimal numbers
   IDENT,        // any names conforming to C identifier rule
