@@ -29,20 +29,20 @@ Statement *Parser::statement() {
 		ident = lexer.get_token_string();
 		lexer.lexical();
 	} else {
-    cout << "(Error) IDENT expected but not found\n";
+    messages.push_back("(Error) IDENT expected but not found");
     while (lexer.get_next_token() != SEMI_COLON
         && lexer.get_next_token() != END_OF_FILE)
       lexer.lexical();
-    return NULL;
+    return new Statement(NULL, "", NULL, messages);
 	}
 	if (lexer.get_next_token() == ASSIGNMENT_OP) {
 		lexer.lexical();
 	} else {
-		cout << "(Error) assignment operator is not found\n";	// error
+		messages.push_back("(Error) assignment operator is not found");
     while (lexer.get_next_token() != SEMI_COLON
         && lexer.get_next_token() != END_OF_FILE)
       lexer.lexical();
-    return NULL;
+    return new Statement(NULL, "", NULL, messages);
 	}
 	Expression *expr = expression();
 	return new Statement(symbol_table, ident, expr, messages);

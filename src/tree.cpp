@@ -126,28 +126,40 @@ void Statement::set_semi_colon() {
 }
 
 void Statement::analyze() {
+  if (expression == NULL) return;
 	expression->analyze();
 	symbol_table->add_ident(ident);
 }
 
 Container Statement::evaluate() {
-	symbol_table->set_value(ident, expression->evaluate());
+  if (expression != NULL)
+    symbol_table->set_value(ident, expression->evaluate());
 	return Container();
 }
 
 int Statement::get_id_count() {
-	return expression->get_id_count() + 1;
+  if (expression != NULL)
+    return expression->get_id_count() + 1;
+  return 0;
 }
 
 int Statement::get_const_count() {
-	return expression->get_const_count();
+  if (expression != NULL)
+    return expression->get_const_count();
+  return 0;
 }
 
 int Statement::get_op_count() {
-	return expression->get_op_count();
+  if (expression != NULL)
+    return expression->get_op_count();
+  return 0;
 }
 
 void Statement::print() {
+  if (expression == NULL) {
+    cout << "This statement is not parsed\n";
+    return;
+  }
 	cout << ident << " := ";
 	expression->print();
 	if (semi_colon) {
@@ -157,7 +169,14 @@ void Statement::print() {
 }
 
 void Statement::print_messages() {
-  expression->print_messages();
+  if (expression != NULL) {
+    expression->print_messages();
+    return;
+  }
+
+  for (auto message: messages) {
+    cout << message << '\n';
+  }
 }
 
 Statement::~Statement() {
