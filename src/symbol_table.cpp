@@ -22,9 +22,9 @@ void Container::div(Container container) {
 
 void Container::print() {
 	if (is_unknown) {
-		cout << "Unknown";
+		cout << "\e[31;1mUnknown\e[37;0m";
 	} else {
-		cout << value;
+		cout << "\e[32;1m" << value << "\e[37;0m";
 	}
 }
 
