@@ -29,7 +29,7 @@ Statement *Parser::statement() {
 		ident = lexer.get_token_string();
 		lexer.lexical();
 	} else {
-    messages.push_back("(Error) IDENT expected but not found");
+    messages.push_back("\e[31m(Error) IDENT expected but not found\e[37m");
     while (lexer.get_next_token() != SEMI_COLON
         && lexer.get_next_token() != END_OF_FILE)
       lexer.lexical();
@@ -38,7 +38,7 @@ Statement *Parser::statement() {
 	if (lexer.get_next_token() == ASSIGNMENT_OP) {
 		lexer.lexical();
 	} else {
-		messages.push_back("(Error) assignment operator is not found");
+		messages.push_back("\e[31m(Error) assignment operator is not found\e[37m");
     while (lexer.get_next_token() != SEMI_COLON
         && lexer.get_next_token() != END_OF_FILE)
       lexer.lexical();
@@ -103,10 +103,10 @@ Factor *Parser::factor() {
 		}
 
 		if (lexer.get_next_token() == ADD_OP) {
-      messages.push_back("(Warning) eliminate duplicated add (or sub) operator");
+      messages.push_back("\e[33m(Warning) eliminate duplicated add (or sub) operator\e[37m");
 			lexer.lexical();
 		} else if (lexer.get_next_token() == MULT_OP) {
-      messages.push_back("(Warning) eliminate duplicated mult (or div) operator");
+      messages.push_back("\e[33m(Warning) eliminate duplicated mult (or div) operator\e[37m");
 			lexer.lexical();
 		} else {
 			break;
