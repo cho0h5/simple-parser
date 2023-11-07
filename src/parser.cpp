@@ -82,29 +82,30 @@ FactorTail *Parser::factor_tail() {
 }
 
 Factor *Parser::factor() {
+  vector<string> messages;
 	for (;;) {
 		if (lexer.get_next_token() == LEFT_PAREN) {
 			lexer.lexical();
 			Expression *expr = expression();
 			if (lexer.get_next_token() == RIGHT_PAREN) {
 				lexer.lexical();
-				return new Factor(symbol_table, expr, "", 0);
+				return new Factor(symbol_table, expr, "", 0, messages);
 			}
 		} else if (lexer.get_next_token() == IDENT) {
 			string ident = lexer.get_token_string();
 			lexer.lexical();
-			return new Factor(symbol_table, NULL, ident, 0);
+			return new Factor(symbol_table, NULL, ident, 0, messages);
 		} else if (lexer.get_next_token() == CONST) {
 			int number = stoi(lexer.get_token_string());
 			lexer.lexical();
-			return new Factor(symbol_table, NULL, "", number);
+			return new Factor(symbol_table, NULL, "", number, messages);
 		}
 
 		if (lexer.get_next_token() == ADD_OP) {
-			cout << "(Warning) eliminate duplicated add (or sub) operator\n";
+      messages.push_back("(Warning) eliminate duplicated add (or sub) operator");
 			lexer.lexical();
 		} else if (lexer.get_next_token() == MULT_OP) {
-			cout << "(Warning) eliminate duplicated mult (or div) operator\n";
+      messages.push_back("(Warning) eliminate duplicated mult (or div) operator");
 			lexer.lexical();
 		} else {
 			break;

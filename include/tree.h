@@ -72,6 +72,8 @@ class Statement : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
+
+  void print_messages();
 };
 
 class Expression : public Tree {
@@ -88,6 +90,8 @@ class Expression : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
+
+  void print_messages();
 };
 
 class TermTail : public Tree {
@@ -106,6 +110,8 @@ class TermTail : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
+
+  void print_messages();
 };
 
 class Term : public Tree {
@@ -122,6 +128,8 @@ class Term : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
+
+  void print_messages();
 };
 
 class FactorTail : public Tree {
@@ -140,15 +148,18 @@ class FactorTail : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
+
+  void print_messages();
 };
 
 class Factor : public Tree {
 	Expression *expression;
 	string ident;
 	int number;
+  vector<string> messages;
 
 	public:
-	Factor(SymbolTable *symbol_table, Expression *expression, string ident, int number);
+	Factor(SymbolTable *symbol_table, Expression *expression, string ident, int number, vector<string> messages);
 	virtual ~Factor();
 
 	virtual void analyze() override;
@@ -157,6 +168,8 @@ class Factor : public Tree {
 	virtual int get_const_count() override;
 	virtual int get_op_count() override;
 	virtual void print() override;
+
+  void print_messages();
 };
 
 #endif

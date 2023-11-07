@@ -47,6 +47,7 @@ Statements::Statements(SymbolTable *symbol_table, Statement *statement, Statemen
 void Statements::analyze() {
   if (statement != NULL) {
     statement->print();
+    statement->print_messages();
     cout << "ID: " << statement->get_id_count() << "; ";
     cout << "CONST: " << statement->get_const_count() << "; ";
     cout << "OP: " << statement->get_op_count() << "\n";
@@ -154,6 +155,10 @@ void Statement::print() {
 	cout << '\n';
 }
 
+void Statement::print_messages() {
+  expression->print_messages();
+}
+
 Statement::~Statement() {
 	delete expression;
 }
@@ -217,6 +222,13 @@ void Expression::print() {
 		cout << ' ';
 		term_tail->print();
 	}
+}
+
+void Expression::print_messages() {
+  term->print_messages();
+  if (term_tail != NULL) {
+    term_tail->print_messages();
+  }
 }
 
 Expression::~Expression() {
@@ -291,6 +303,13 @@ void TermTail::print() {
 	}
 }
 
+void TermTail::print_messages() {
+  term->print_messages();
+  if (term_tail != NULL) {
+    term_tail->print_messages();
+  }
+}
+
 TermTail::~TermTail() {
 	delete term;
 	delete term_tail;
@@ -355,6 +374,13 @@ void Term::print() {
 		cout << ' ';
 		factor_tail->print();
 	}
+}
+
+void Term::print_messages() {
+  factor->print_messages();
+  if (factor_tail != NULL) {
+    factor_tail->print_messages();
+  }
 }
 
 Term::~Term() {
@@ -429,6 +455,13 @@ void FactorTail::print() {
 	}
 }
 
+void FactorTail::print_messages() {
+  factor->print_messages();
+  if (factor_tail != NULL) {
+    factor_tail->print_messages();
+  }
+}
+
 FactorTail::~FactorTail() {
 	delete factor;
 	delete factor_tail;
@@ -436,11 +469,12 @@ FactorTail::~FactorTail() {
 
 //////////////// Factor ////////////////
 
-Factor::Factor(SymbolTable *symbol_table, Expression *expression, string ident, int number) {
+Factor::Factor(SymbolTable *symbol_table, Expression *expression, string ident, int number, vector<string> messages) {
 	this->symbol_table = symbol_table;
 	this->expression = expression;
 	this->ident = ident;
 	this->number = number;
+  this->messages = messages;
 }
 
 void Factor::analyze() {
@@ -498,6 +532,12 @@ void Factor::print() {
 	} else {
 		cout << number;
 	}
+}
+
+void Factor::print_messages() {
+  for (auto message: messages) {
+    cout << message << '\n';
+  }
 }
 
 Factor::~Factor() {
