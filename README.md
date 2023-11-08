@@ -1,3 +1,7 @@
+## Todo
+- testcase 소개?
+- 음수처리 했다고 적기
+
 # Simple Parser
 ## Team
 | 이름 | 학번 |
